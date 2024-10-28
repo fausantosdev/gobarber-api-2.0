@@ -1,0 +1,21 @@
+{
+  "name": "gobarber-api-2.0",
+  "version": "1.0.0",
+  "description": "Backend of an application for booking barber shop appointments",
+  "main": "index.js",
+  "repository": "https://github.com/fausantosdev/gobarber-api-2.0.git",
+  "author": "Flávio dos Santos Marques <fausantosdev@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}
