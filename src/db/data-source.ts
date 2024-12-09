@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { User } from './entities/User'
+
+import { CreateAppointments1733702092363 } from './migrations/1733702092363-createAppointments'
 
 import { env } from '../env'
 
@@ -13,8 +14,8 @@ export const AppDataSource = new DataSource({
   database: env.DBNAME,
   synchronize: true,
   logging: false,
-  entities: [User],
-  migrations: [],
+  entities: [],
+  migrations: [CreateAppointments1733702092363],
   subscribers: [],
   ssl: true,
 })
