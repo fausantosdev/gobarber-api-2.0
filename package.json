@@ -13,6 +13,7 @@
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    },
    "dependencies": {
+      "date-fns": "^4.1.0",
       "dotenv": "^16.4.7",
       "express": "^4.21.1",
       "pg": "^8.4.0",
