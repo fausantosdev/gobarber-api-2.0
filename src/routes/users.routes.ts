@@ -1,5 +1,7 @@
 import { Router } from 'express'
 
+import { hash } from '../lib/crypt'
+
 import { UserRepository } from '../db/repositories/user-repository'
 import CreateUserService from '../services/create-user-service'
 
@@ -13,7 +15,15 @@ routes.post('/', async (request, response): any => {
   try {
     const { name, email, password } = request.body
 
-    const user = await createUserService.execute({ name, email, password })
+    const hashedPassword = await hash(password, 8)
+
+    const user = await createUserService.execute({
+      name,
+      email,
+      password: hashedPassword,
+    })
+
+    delete user.password
 
     return response.json(user)
   } catch (error: any) {
