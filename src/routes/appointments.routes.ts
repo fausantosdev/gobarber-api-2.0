@@ -9,7 +9,7 @@ const routes = Router()
 
 routes.post('/', async (request, response): any => {
   try {
-    const { provider, date } = request.body
+    const { provider_id, date } = request.body
 
     const parsedDate = parseISO(date)
 
@@ -19,7 +19,7 @@ routes.post('/', async (request, response): any => {
     )
 
     const appointment = await createAppointment.execute({
-      provider,
+      provider_id,
       date: parsedDate,
     })
 

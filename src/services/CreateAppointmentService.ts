@@ -4,7 +4,7 @@ import { AppointmentsRepository } from '../db/repositories/appointment-repositor
 import { Appointment } from '../db/entities/appointment'
 
 type Request = {
-  provider: string
+  provider_id: string
   date: Date
 }
 
@@ -13,7 +13,7 @@ class CreateAppointmentService {
     this.appointmentsRepository = appointmentsRepository
   }
 
-  async execute({ provider, date }: Request): Promise<Appointment> {
+  async execute({ provider_id, date }: Request): Promise<Appointment> {
     const appointmentDate = startOfHour(date)
 
     const findAppointmentOnTheSameDate =
@@ -23,7 +23,7 @@ class CreateAppointmentService {
       throw Error('This appointment is already booked')
 
     const appointment = this.appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     }) as Appointment
 
