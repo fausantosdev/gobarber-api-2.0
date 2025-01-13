@@ -1,12 +1,15 @@
 import { parseISO } from 'date-fns'
 import { Router } from 'express'
 
+import ensureAuthenticated from '../middlewares/ensure-authenticated'
+
 import { CreateAppointmentService } from '../services/CreateAppointmentService'
 import { GetAppointmentService } from '../services/GetAppointmentByService'
 import { AppointmentsRepository } from '../db/repositories/appointment-repository'
 
 const routes = Router()
 
+routes.use(ensureAuthenticated)
 routes.post('/', async (request, response): any => {
   try {
     const { provider_id, date } = request.body
