@@ -30,9 +30,9 @@ routes.post('/', async (request, response): Promise<any> => {
       password: hashedPassword,
     })
 
-    delete user.password
+    const { avatar } = user
 
-    return response.json(user)
+    return response.json({ user: { name, email, avatar } })
   } catch (error: any) {
     return response.status(400).json({ error: error.message })
   }
@@ -50,9 +50,15 @@ routes.patch(
       avatar_filename: request.file!.filename,
     })
 
-    delete user.password
+    const { name, email, avatar } = user
 
-    return response.json(user)
+    return response.json({
+      user: {
+        name,
+        email,
+        avatar,
+      },
+    })
   }
 )
 

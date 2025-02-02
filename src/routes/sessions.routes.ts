@@ -17,9 +17,16 @@ routes.post('/sign-in', async (request, response): Promise<any> => {
     password,
   })
 
-  delete user.password
+  const { name, email: mail, avatar } = user
 
-  return response.json({ user, token })
+  return response.json({
+    user: {
+      name,
+      email: mail,
+      avatar,
+    },
+    token,
+  })
 })
 
 export default routes
