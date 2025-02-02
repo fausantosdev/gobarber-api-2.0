@@ -45,18 +45,14 @@ routes.patch(
   async (request, response): any => {
     const updateUserAvatarService = new UpdateUserAvatarService(usersRepository)
 
-    try {
-      const user = await updateUserAvatarService.execute({
-        user_id: request.user.id,
-        avatar_filename: request.file!.filename,
-      })
+    const user = await updateUserAvatarService.execute({
+      user_id: request.user.id,
+      avatar_filename: request.file!.filename,
+    })
 
-      delete user.password
+    delete user.password
 
-      return response.json(user)
-    } catch (error: any) {
-      return response.status(error.statusCode).json({ error: error.message })
-    }
+    return response.json(user)
   }
 )
 

@@ -10,20 +10,16 @@ const usersRepository = new UserRepository()
 routes.post('/sign-in', async (request, response): any => {
   const authenticateUserService = new AuthenticateUserService(usersRepository)
 
-  try {
-    const { email, password } = request.body
+  const { email, password } = request.body
 
-    const { user, token } = await authenticateUserService.execute({
-      email,
-      password,
-    })
+  const { user, token } = await authenticateUserService.execute({
+    email,
+    password,
+  })
 
-    delete user.password
+  delete user.password
 
-    return response.json({ user, token })
-  } catch (error: any) {
-    return response.status(error.statusCode).json({ error: error.message })
-  }
+  return response.json({ user, token })
 })
 
 export default routes

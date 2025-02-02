@@ -7,6 +7,11 @@ import tseslint from "typescript-eslint";
 export default [
   {
     files: ["src/*.{js,mjs,cjs,ts}"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["error", {
+        "argsIgnorePattern": "_"
+      }]
+    }
   },
   {languageOptions: { globals: globals.node }},
   pluginJs.configs.recommended,
