@@ -1,4 +1,4 @@
-import { Request } from 'express'
+import { Request, Response, NextFunction } from 'express'
 
 import { decodeJWT } from '../lib/jwt'
 import { AppError } from '../errors/AppError'
@@ -11,8 +11,8 @@ type TokenPayload = {
 
 export default function ensureAuthenticated(
   request: Request,
-  response,
-  next
+  _response: Response,
+  next: NextFunction
 ): void {
   const authHeader = request.headers.authorization
 
