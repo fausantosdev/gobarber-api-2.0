@@ -2,6 +2,7 @@ import { User } from '../db/entities/user'
 import { UserRepository } from '../db/repositories/user-repository'
 import { compare } from '../lib/crypt'
 import { generateJWT } from '../lib/jwt'
+import { AppError } from '../errors/AppError'
 
 type Request = {
   email: string
@@ -23,11 +24,11 @@ class AuthenticateUserService {
       where: { email },
     })
 
-    if (!user) throw new Error('Invalid credentials')
+    if (!user) throw new AppError('Invalid credentials', 401)
 
     const passwordMatched = await compare(password, user.password)
 
-    if (!passwordMatched) throw new Error('Invalid credentials')
+    if (!passwordMatched) throw new AppError('Invalid credentials', 401)
 
     const token = generateJWT({}, String(user.id))
 

@@ -1,6 +1,6 @@
 import { User } from '../db/entities/user'
-
 import { UserRepository } from '../db/repositories/user-repository'
+import { AppError } from '../errors/AppError'
 
 type Request = {
   name: string
@@ -18,7 +18,7 @@ class CreateAppointmentService {
       where: { email },
     })
 
-    if (checkUserExists) throw new Error('Email address already used')
+    if (checkUserExists) throw new AppError('Email address already used')
 
     const user = this.usersRepository.create({
       name,

@@ -45,7 +45,7 @@ routes.get('/', async (request, response): any => {
 
     return response.json(appointment)
   } catch (error: any) {
-    return response.status(400).json({ error: error.message })
+    return response.status(error.statusCode).json({ error: error.message })
   }
 })
 

@@ -1,5 +1,7 @@
 import { Request } from 'express'
+
 import { decodeJWT } from '../lib/jwt'
+import { AppError } from '../errors/AppError'
 
 type TokenPayload = {
   iat: number
@@ -14,7 +16,7 @@ export default function ensureAuthenticated(
 ): void {
   const authHeader = request.headers.authorization
 
-  if (!authHeader) throw new Error('JWT token is missing')
+  if (!authHeader) throw new AppError('JWT token is missing', 401)
 
   const [, token] = authHeader.split(' ')
 

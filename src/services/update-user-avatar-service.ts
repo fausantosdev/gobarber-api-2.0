@@ -3,8 +3,8 @@ import fs from 'node:fs'
 
 import { UserRepository } from '../db/repositories/user-repository'
 import { User } from '../db/entities/user'
-
 import { uploadConfig } from '../lib/upload'
+import { AppError } from '../errors/AppError'
 
 type Request = {
   user_id: string
@@ -17,7 +17,8 @@ class UpdateUserAvatarService {
   async execute({ user_id, avatar_filename }: Request): Promise<User> {
     const user = await this.usersRepository.findOne({ where: { id: user_id } })
 
-    if (!user) throw new Error('Only authenticated users can change avatar')
+    if (!user)
+      throw new AppError('Only authenticated users can change avatar', 401)
 
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar)
