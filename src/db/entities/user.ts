@@ -9,7 +9,7 @@ import {
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id: string
 
   @Column()
   name: string
@@ -19,6 +19,9 @@ export class User {
 
   @Column()
   password: string
+
+  @Column({ nullable: true })
+  avatar: string
 
   @CreateDateColumn()
   created_at: Date
