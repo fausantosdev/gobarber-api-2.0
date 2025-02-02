@@ -10,7 +10,7 @@ import { AppointmentsRepository } from '../db/repositories/appointment-repositor
 const routes = Router()
 
 routes.use(ensureAuthenticated)
-routes.post('/', async (request, response): any => {
+routes.post('/', async (request, response): Promise<any> => {
   try {
     const { provider_id, date } = request.body
 
@@ -32,7 +32,7 @@ routes.post('/', async (request, response): any => {
   }
 })
 
-routes.get('/', async (request, response): any => {
+routes.get('/', async (request, response): Promise<any> => {
   const date = request.body.date ?? null
 
   const appointmentsRepository = new AppointmentsRepository()

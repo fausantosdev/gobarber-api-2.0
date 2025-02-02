@@ -7,7 +7,7 @@ import AuthenticateUserService from '../services/authenticate-user-service'
 
 const usersRepository = new UserRepository()
 
-routes.post('/sign-in', async (request, response): any => {
+routes.post('/sign-in', async (request, response): Promise<any> => {
   const authenticateUserService = new AuthenticateUserService(usersRepository)
 
   const { email, password } = request.body

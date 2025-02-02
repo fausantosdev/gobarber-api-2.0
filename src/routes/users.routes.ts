@@ -16,7 +16,7 @@ const usersRepository = new UserRepository()
 
 const upload = multer(uploadConfig)
 
-routes.post('/', async (request, response): any => {
+routes.post('/', async (request, response): Promise<any> => {
   const createUserService = new CreateUserService(usersRepository)
 
   try {
@@ -42,7 +42,7 @@ routes.patch(
   '/avatar',
   ensureAuthenticated,
   upload.single('avatar'),
-  async (request, response): any => {
+  async (request, response): Promise<any> => {
     const updateUserAvatarService = new UpdateUserAvatarService(usersRepository)
 
     const user = await updateUserAvatarService.execute({
