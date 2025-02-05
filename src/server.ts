@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
+import cors from 'cors'
 
 import routes from './routes'
 import { AppDataSource } from './db/data-source'
@@ -7,6 +8,12 @@ import { uploadConfig } from './lib/upload'
 import { AppError } from './errors/AppError'
 
 const app = express()
+
+app.use(
+  cors({
+    origin: process.env.APPLICATION,
+  })
+)
 
 app.use(express.json())
 app.use(routes)
